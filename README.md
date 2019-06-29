@@ -13,6 +13,7 @@ Objetivos:
 -	Identificar aplicaciones relevantes para economía 
 
 Programa Actual:
+
   Clase 1: Presentación del lenguaje Python
   
     - Modelos de aprendizaje estadístico. 
