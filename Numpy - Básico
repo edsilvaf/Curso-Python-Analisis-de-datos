@@ -1,0 +1,269 @@
+Ejercicios Python
+damiansilva14@hotmail.com
+
+https://docs.python.org/
+
+https://docs.scipy.org/doc/numpy/
+
+In [1]:
+import numpy as np
+Numpy
+Ejercicio 1
+Crea un array de 450 enteros aleatorios entre -10 y 10
+https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.randint.html
+
+In [34]:
+array = np.random.randint(low=-10, high=10, size=450, dtype='l')
+
+array
+Out[34]:
+array([  0,  -6,  -1,  -2,   5, -10,  -1, -10,   9,   4,   3,   2,   2,
+        -7,  -4, -10,  -6,  -8, -10,  -5,  -9,  -4,   3,  -3,   2,   3,
+         8,  -7,   1,   7,  -1,   7,  -8,   3,  -4,  -8,  -2,   9,  -1,
+         0,  -1,  -5,   1,   3,   0,   1,  -6,  -7,   4,  -3,  -2,  -8,
+        -5,   4,   6,  -2, -10,  -6,   8,  -9,   9,  -7,   1,  -3,   0,
+        -3,   0,  -6, -10,  -5,  -6,  -5,   8,  -3,  -8,   1,   7,  -5,
+         9,   3,  -7,  -3,  -1,  -6,   8,   7,   8,  -9,  -9,  -7,   1,
+         3,   0,  -1,   5,  -1,  -3,  -3,   0,   7, -10,   1,  -1,  -1,
+        -2,   6,   6,  -3,   0,   5,  -4,   5,  -3,   5,   9,   5,   0,
+        -8,   1,  -2,   5, -10,   6,   3,   2,   2,  -8,  -4,   5,   2,
+       -10,  -9,   2,   0,   8,   4, -10,  -9,   0,   3,  -6,   7,   6,
+        -3,   5,  -2,  -1,   0,   7,  -2,   2,   3,  -7,   2,  -7,  -3,
+        -3,   1,   5, -10,   3,  -9,   9,   7,  -7,  -9,  -8,   7,  -1,
+         6,  -1,  -8, -10,  -4,  -7,   0,  -6, -10,  -2,  -5,  -2,  -2,
+         2,   6,   3,  -5,   9,  -6,   1,  -4,   4,  -8, -10,  -8,   8,
+        -9, -10,  -1,  -9, -10,  -3,  -2,   1,  -4,   5,  -8,   8,  -9,
+       -10,  -4,  -2, -10,   4, -10,  -4,   9,   4,   7,  -5,  -8,   9,
+        -7,  -6, -10,  -4,  -6,  -9,  -3,   9,   3,   1,   7,   3,   8,
+         4,  -2,   1,   6,   4,   4,  -7,   1,   0,   7,  -1,   4,  -8,
+         8,   5,   4,  -4,   9,   0,   9,   3,  -3,   0,  -3,  -1,  -3,
+         1,  -9,   8,  -5,  -9,  -9,  -7,   7,   0,  -1,  -8,  -7, -10,
+         3, -10,  -5, -10,   5,   4, -10,  -3, -10,   4,  -8,  -5,   7,
+         7,   9,  -3,   1,  -3,  -1,  -7, -10,   0,   7,   7,  -6,  -2,
+         9, -10,   5,  -5,   2,  -8,  -2,   7,   3,  -2,  -6,  -2,  -3,
+        -1, -10,   7,   1,   8,   1,   7, -10,  -7,   5,   0,  -9,   1,
+         0,  -3,  -4,  -3,   0,  -3,  -5,   7,  -6,   5,  -9, -10,   9,
+        -2,   0,  -5,   8,  -5,   3,   7,  -8,  -4,   3,   1,   2,   2,
+        -9,   3,  -7,   8,   3,  -8,   3,   5,   1,  -4,  -4,   1,  -4,
+        -7,  -9,   5,  -4,   5,   3,  -7,  -7,   8,  -2,   7,  -8,  -4,
+         4, -10,  -5,   2,   6,  -7, -10,  -6,   1,  -4,  -7, -10,  -1,
+         0,   7,   8,   6,  -9,   5,   1,   5,   1,   2,   1,  -9,   4,
+         7,   3,   8,   0,   0,  -4,  -2,   3,   1,   0,   1,   5,  -3,
+        -8,   0,  -3,   9,   7,  -9,  -7,  -3,   1,   1,   0,  -3, -10,
+        -5,  -5,   2,   0,   8,   8,   2,   2,  -4,   2,  -5,   9, -10,
+        -6,  -8,  -3,   6,  -2,  -6,  -7,  -7])
+Redimensiónalo como matriz de 5x70 ¿Hay algún problema? Si lo hay, corrígelo.
+Comprobamos qué dimensión tiene nuestro array:
+
+In [35]:
+array.shape
+Out[35]:
+(450,)
+Redimensionamos:
+
+In [36]:
+matrix = array.reshape(5,70)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-36-93c53ed84f18> in <module>()
+----> 1 matrix = array.reshape(5,70)
+
+ValueError: cannot reshape array of size 450 into shape (5,70)
+In [37]:
+matrix = array.reshape(5,90)
+matrix
+Out[37]:
+array([[  0,  -6,  -1,  -2,   5, -10,  -1, -10,   9,   4,   3,   2,   2,
+         -7,  -4, -10,  -6,  -8, -10,  -5,  -9,  -4,   3,  -3,   2,   3,
+          8,  -7,   1,   7,  -1,   7,  -8,   3,  -4,  -8,  -2,   9,  -1,
+          0,  -1,  -5,   1,   3,   0,   1,  -6,  -7,   4,  -3,  -2,  -8,
+         -5,   4,   6,  -2, -10,  -6,   8,  -9,   9,  -7,   1,  -3,   0,
+         -3,   0,  -6, -10,  -5,  -6,  -5,   8,  -3,  -8,   1,   7,  -5,
+          9,   3,  -7,  -3,  -1,  -6,   8,   7,   8,  -9,  -9,  -7],
+       [  1,   3,   0,  -1,   5,  -1,  -3,  -3,   0,   7, -10,   1,  -1,
+         -1,  -2,   6,   6,  -3,   0,   5,  -4,   5,  -3,   5,   9,   5,
+          0,  -8,   1,  -2,   5, -10,   6,   3,   2,   2,  -8,  -4,   5,
+          2, -10,  -9,   2,   0,   8,   4, -10,  -9,   0,   3,  -6,   7,
+          6,  -3,   5,  -2,  -1,   0,   7,  -2,   2,   3,  -7,   2,  -7,
+         -3,  -3,   1,   5, -10,   3,  -9,   9,   7,  -7,  -9,  -8,   7,
+         -1,   6,  -1,  -8, -10,  -4,  -7,   0,  -6, -10,  -2,  -5],
+       [ -2,  -2,   2,   6,   3,  -5,   9,  -6,   1,  -4,   4,  -8, -10,
+         -8,   8,  -9, -10,  -1,  -9, -10,  -3,  -2,   1,  -4,   5,  -8,
+          8,  -9, -10,  -4,  -2, -10,   4, -10,  -4,   9,   4,   7,  -5,
+         -8,   9,  -7,  -6, -10,  -4,  -6,  -9,  -3,   9,   3,   1,   7,
+          3,   8,   4,  -2,   1,   6,   4,   4,  -7,   1,   0,   7,  -1,
+          4,  -8,   8,   5,   4,  -4,   9,   0,   9,   3,  -3,   0,  -3,
+         -1,  -3,   1,  -9,   8,  -5,  -9,  -9,  -7,   7,   0,  -1],
+       [ -8,  -7, -10,   3, -10,  -5, -10,   5,   4, -10,  -3, -10,   4,
+         -8,  -5,   7,   7,   9,  -3,   1,  -3,  -1,  -7, -10,   0,   7,
+          7,  -6,  -2,   9, -10,   5,  -5,   2,  -8,  -2,   7,   3,  -2,
+         -6,  -2,  -3,  -1, -10,   7,   1,   8,   1,   7, -10,  -7,   5,
+          0,  -9,   1,   0,  -3,  -4,  -3,   0,  -3,  -5,   7,  -6,   5,
+         -9, -10,   9,  -2,   0,  -5,   8,  -5,   3,   7,  -8,  -4,   3,
+          1,   2,   2,  -9,   3,  -7,   8,   3,  -8,   3,   5,   1],
+       [ -4,  -4,   1,  -4,  -7,  -9,   5,  -4,   5,   3,  -7,  -7,   8,
+         -2,   7,  -8,  -4,   4, -10,  -5,   2,   6,  -7, -10,  -6,   1,
+         -4,  -7, -10,  -1,   0,   7,   8,   6,  -9,   5,   1,   5,   1,
+          2,   1,  -9,   4,   7,   3,   8,   0,   0,  -4,  -2,   3,   1,
+          0,   1,   5,  -3,  -8,   0,  -3,   9,   7,  -9,  -7,  -3,   1,
+          1,   0,  -3, -10,  -5,  -5,   2,   0,   8,   8,   2,   2,  -4,
+          2,  -5,   9, -10,  -6,  -8,  -3,   6,  -2,  -6,  -7,  -7]])
+In [38]:
+matrix.shape
+Out[38]:
+(5, 90)
+Obtén los números positivos de esa matriz utilizando boolean indexing
+In [39]:
+matrix>0
+Out[39]:
+array([[False, False, False, False,  True, False, False, False,  True,
+         True,  True,  True,  True, False, False, False, False, False,
+        False, False, False, False,  True, False,  True,  True,  True,
+        False,  True,  True, False,  True, False,  True, False, False,
+        False,  True, False, False, False, False,  True,  True, False,
+         True, False, False,  True, False, False, False, False,  True,
+         True, False, False, False,  True, False,  True, False,  True,
+        False, False, False, False, False, False, False, False, False,
+         True, False, False,  True,  True, False,  True,  True, False,
+        False, False, False,  True,  True,  True, False, False, False],
+       [ True,  True, False, False,  True, False, False, False, False,
+         True, False,  True, False, False, False,  True,  True, False,
+        False,  True, False,  True, False,  True,  True,  True, False,
+        False,  True, False,  True, False,  True,  True,  True,  True,
+        False, False,  True,  True, False, False,  True, False,  True,
+         True, False, False, False,  True, False,  True,  True, False,
+         True, False, False, False,  True, False,  True,  True, False,
+         True, False, False, False,  True,  True, False,  True, False,
+         True,  True, False, False, False,  True, False,  True, False,
+        False, False, False, False, False, False, False, False, False],
+       [False, False,  True,  True,  True, False,  True, False,  True,
+        False,  True, False, False, False,  True, False, False, False,
+        False, False, False, False,  True, False,  True, False,  True,
+        False, False, False, False, False,  True, False, False,  True,
+         True,  True, False, False,  True, False, False, False, False,
+        False, False, False,  True,  True,  True,  True,  True,  True,
+         True, False,  True,  True,  True,  True, False,  True, False,
+         True, False,  True, False,  True,  True,  True, False,  True,
+        False,  True,  True, False, False, False, False, False,  True,
+        False,  True, False, False, False, False,  True, False, False],
+       [False, False, False,  True, False, False, False,  True,  True,
+        False, False, False,  True, False, False,  True,  True,  True,
+        False,  True, False, False, False, False, False,  True,  True,
+        False, False,  True, False,  True, False,  True, False, False,
+         True,  True, False, False, False, False, False, False,  True,
+         True,  True,  True,  True, False, False,  True, False, False,
+         True, False, False, False, False, False, False, False,  True,
+        False,  True, False, False,  True, False, False, False,  True,
+        False,  True,  True, False, False,  True,  True,  True,  True,
+        False,  True, False,  True,  True, False,  True,  True,  True],
+       [False, False,  True, False, False, False,  True, False,  True,
+         True, False, False,  True, False,  True, False, False,  True,
+        False, False,  True,  True, False, False, False,  True, False,
+        False, False, False, False,  True,  True,  True, False,  True,
+         True,  True,  True,  True,  True, False,  True,  True,  True,
+         True, False, False, False, False,  True,  True, False,  True,
+         True, False, False, False, False,  True,  True, False, False,
+        False,  True,  True, False, False, False, False, False,  True,
+        False,  True,  True,  True,  True, False,  True, False,  True,
+        False, False, False, False,  True, False, False, False, False]])
+In [40]:
+matrix[matrix>0]
+Out[40]:
+array([5, 9, 4, 3, 2, 2, 3, 2, 3, 8, 1, 7, 7, 3, 9, 1, 3, 1, 4, 4, 6, 8,
+       9, 1, 8, 1, 7, 9, 3, 8, 7, 8, 1, 3, 5, 7, 1, 6, 6, 5, 5, 5, 9, 5,
+       1, 5, 6, 3, 2, 2, 5, 2, 2, 8, 4, 3, 7, 6, 5, 7, 2, 3, 2, 1, 5, 3,
+       9, 7, 7, 6, 2, 6, 3, 9, 1, 4, 8, 1, 5, 8, 4, 9, 4, 7, 9, 9, 3, 1,
+       7, 3, 8, 4, 1, 6, 4, 4, 1, 7, 4, 8, 5, 4, 9, 9, 3, 1, 8, 7, 3, 5,
+       4, 4, 7, 7, 9, 1, 7, 7, 9, 5, 2, 7, 3, 7, 1, 8, 1, 7, 5, 1, 7, 5,
+       9, 8, 3, 7, 3, 1, 2, 2, 3, 8, 3, 3, 5, 1, 1, 5, 5, 3, 8, 7, 4, 2,
+       6, 1, 7, 8, 6, 5, 1, 5, 1, 2, 1, 4, 7, 3, 8, 3, 1, 1, 5, 9, 7, 1,
+       1, 2, 8, 8, 2, 2, 2, 9, 6])
+Obtén con una función los datos no duplicados
+comando "set": a partir de una lista, nos devuelve un conjunto de datos no duplicados.
+
+In [41]:
+# Ejemplo de set
+L = [1,1,2]
+type(L)
+Out[41]:
+list
+In [42]:
+set(L)
+Out[42]:
+{1, 2}
+In [43]:
+# transformación de nuevo a lista
+L = list(set(L))
+L
+Out[43]:
+[1, 2]
+Desglosado:
+
+In [44]:
+# array -> lista -> set
+array = list(array)
+array = set(array)
+
+array
+Out[44]:
+{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+In [45]:
+# set -> lista -> array
+array = list(array)
+array = np.array(array)
+
+array
+Out[45]:
+array([  0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  -9,  -2, -10,
+        -8,  -7,  -6,  -5,  -4,  -3,  -1])
+En una línea de código:
+
+In [46]:
+no_duplicados = np.array(list(set(array)))
+no_duplicados
+Out[46]:
+array([  0,   1,   2,   3,   4,   5,   6,   7,   8,   9, -10,  -9,  -8,
+        -7,  -6,  -5,  -4,  -3,  -2,  -1])
+Sobre los datos no duplicados, obtén la media y los cuartiles.
+In [47]:
+# utilizamos la función media
+np.mean(no_duplicados)
+Out[47]:
+-0.5
+In [49]:
+# percentiles
+np.percentile(no_duplicados, 25)
+Out[49]:
+-5.25
+Para dicho array de elementos no duplicados, sumarle a cada elemento una unidad.
+In [61]:
+array = array + 1
+Dado este array x = np.array([-5,6,-7,9]), crea otro array en valor absoluto
+In [70]:
+x = np.array([-5,6,-7,9])
+print(np.absolute(x)) #Abs
+[5 6 7 9]
+Dado este array x = np.array([-5,6,-7,9]), transformalo en una matriz 2x2 y calcula el máximo y el mínimo de cada fila y columna.
+In [76]:
+x = np.array([-5,6,-7,9])
+x = x.reshape(2,2)
+
+print(x.max(axis=1)) #Máximo de cada fila
+print(x.max(axis=0))
+[6 9]
+[-5  9]
+Crear una matriz diagonal
+In [66]:
+a = np.diag(np.arange(3))
+a
+Out[66]:
+array([[0, 0, 0],
+       [0, 1, 0],
+       [0, 0, 2]])
+Crear una matriz de 0 con rango 3x3
+In [69]:
+np.zeros((3,5),dtype=float)
+Out[69]:
+array([[0., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0.]])
