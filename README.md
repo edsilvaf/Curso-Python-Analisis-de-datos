@@ -23,3 +23,17 @@ Programa Actual:
     - El rol de la teoría económica. 
     
     - Uso del lenguaje Python como calculadora.     
+
+  Clase 2: Estructura de datos
+  
+    - Concepto de bases de datos y estructuras de datos.
+    
+    - Estructura de datos del lenguaje Python (Lista, Tuplas, DataFrames).
+    
+  Clase 3: Entrenamiento de modelos
+  
+    - Estimación y Entrenamiento de modelos (Modelo lineal y lineal múltiple). 
+    
+    - Ajuste de parámetros. 
+    
+    - Comandos básicos en Python.
