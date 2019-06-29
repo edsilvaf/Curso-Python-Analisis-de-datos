@@ -14,7 +14,11 @@ Objetivos:
 
 Programa Actual:
   Clase 1: Presentación del lenguaje Python
+  
     - Modelos de aprendizaje estadístico. 
+    
     - Aplicaciones a economía. 
+    
     - El rol de la teoría económica. 
+    
     - Uso del lenguaje Python como calculadora.     
