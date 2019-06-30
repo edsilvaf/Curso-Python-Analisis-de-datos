@@ -37,3 +37,15 @@ Programa Actual:
     - Ajuste de parámetros. 
     
     - Comandos básicos en Python.
+    
+  Clase 4: Visualizaciones Graficas
+  
+    - Distintas representaciones graficas usadas en estadística (gráficos de dispersión, correlograma, gráficos de regresión.
+    
+    - Distintas librerías de visualización en el lenguaje Python (Matplotlib, Seaborn, Folium).
+    
+  Clase 5: Herramientas de Economía de Grandes Datos 
+  
+    - Modelos de regresión penalizada (Lasso, Ridge, Elastic Net).
+    
+    - Estimación y ajuste de parámetros mediante el lenguaje Python. Desafíos del uso de los Grandes Datos en Economía.
