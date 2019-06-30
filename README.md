@@ -49,3 +49,5 @@ Programa Actual:
     - Modelos de regresión penalizada (Lasso, Ridge, Elastic Net).
     
     - Estimación y ajuste de parámetros mediante el lenguaje Python. Desafíos del uso de los Grandes Datos en Economía.
+		
+		
