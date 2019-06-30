@@ -1,4 +1,4 @@
-# Curso-Python-Analisis-de-datos
+# Curso Python para Analisis de datos
 Este es un curso de taller dedicado a la enseñanza del lenguaje python para análisis de datos.
 
 El curso tendra un abordaje tanto conceptual como practico. Es recomendable haber cursado previamente la asignatura Econometría, aunque igualmente se abordarán los conceptos más relevantes en las clases.
