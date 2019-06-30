@@ -40,7 +40,7 @@ Programa Actual:
     
   Clase 4: Visualizaciones Graficas
   
-    - Distintas representaciones graficas usadas en estadística (gráficos de dispersión, correlograma, gráficos de regresión.
+    - Distintas representaciones graficas usadas en estadística.
     
     - Distintas librerías de visualización en el lenguaje Python (Matplotlib, Seaborn, Folium).
     
