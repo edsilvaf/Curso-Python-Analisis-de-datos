@@ -1,0 +1,430 @@
+
+Ejercicios
+damiansilva14@hotmail.com
+Pandas
+In [90]:
+import pandas as pd
+import numpy as np
+Ejercicio 1
+Carga en un DataFrame este dataset: https://archive.ics.uci.edu/ml/datasets/Automobile
+In [91]:
+data = pd.read_csv("cars.txt",na_values='?', header=None)
+data.columns = ['Symboling','Normalized-losses','make','fuel-type','aspiration','num-of-doors','body-style','drive-wheels','drive-wheels','engine-location','length','width','height','curb-weigth','engine-type','num-of-cylinders','engine-size','fuel-system','bore','stroke','compression-ratio','horsepower','peak-rpm','city-mpg','highway-mpg','price']
+In [92]:
+# comprobamos que es un dataframe
+type(data)
+Out[92]:
+pandas.core.frame.DataFrame
+In [93]:
+# comprobamos la tipología de las variables
+data.dtypes
+Out[93]:
+Symboling              int64
+Normalized-losses    float64
+make                  object
+fuel-type             object
+aspiration            object
+num-of-doors          object
+body-style            object
+drive-wheels          object
+drive-wheels          object
+engine-location      float64
+length               float64
+width                float64
+height               float64
+curb-weigth            int64
+engine-type           object
+num-of-cylinders      object
+engine-size            int64
+fuel-system           object
+bore                 float64
+stroke               float64
+compression-ratio    float64
+horsepower           float64
+peak-rpm             float64
+city-mpg               int64
+highway-mpg            int64
+price                float64
+dtype: object
+In [94]:
+data.shape
+Out[94]:
+(205, 26)
+Comprueba si tiene datos faltantes y trátalos de la manera que creas más conveniente.
+In [95]:
+data.isnull().sum()
+Out[95]:
+Symboling             0
+Normalized-losses    41
+make                  0
+fuel-type             0
+aspiration            0
+num-of-doors          2
+body-style            0
+drive-wheels          0
+drive-wheels          0
+engine-location       0
+length                0
+width                 0
+height                0
+curb-weigth           0
+engine-type           0
+num-of-cylinders      0
+engine-size           0
+fuel-system           0
+bore                  4
+stroke                4
+compression-ratio     0
+horsepower            2
+peak-rpm              2
+city-mpg              0
+highway-mpg           0
+price                 4
+dtype: int64
+Normalized-losses
+Puesto que la variable 'Normalized-losses' es continua, una opción para tratar los missing values es la media de dicha variable.
+
+In [96]:
+x = np.mean(data['Normalized-losses'])
+
+data['Normalized-losses'] = data['Normalized-losses'].fillna(x)
+num-of-doors
+In [97]:
+data['num-of-doors'].unique()
+Out[97]:
+array(['two', 'four', nan], dtype=object)
+In [98]:
+# pasar de variable categórica a numérica
+categ = {"num-of-doors": {"two": 2, "four": 4}}
+data.replace(categ, inplace=True)
+In [99]:
+# comprobamos su cambio
+data['num-of-doors'].head(5)
+Out[99]:
+0    2.0
+1    2.0
+2    2.0
+3    4.0
+4    4.0
+Name: num-of-doors, dtype: float64
+In [100]:
+# lo reemplazamos por la media
+x = np.mean(data['num-of-doors'])
+x = int(x)
+data['num-of-doors'] = data['num-of-doors'].fillna(x)
+Bore / Stroke / horsepower / peak-rpm / price
+In [101]:
+# bore
+x = np.mean(data['bore'])
+data['bore'] = data['bore'].fillna(x)
+In [102]:
+# stroke
+x = np.mean(data['stroke'])
+data['stroke'] = data['stroke'].fillna(x)
+In [103]:
+# horsepower
+x = np.mean(data['horsepower'])
+data['horsepower'] = data['horsepower'].fillna(x)
+In [104]:
+# peak-rpm
+x = np.mean(data['peak-rpm'])
+data['peak-rpm'] = data['peak-rpm'].fillna(x)
+In [105]:
+# price
+x = np.mean(data['price'])
+data['price'] = data['price'].fillna(x)
+Una forma más rápida de hacer es con el bucle for :
+
+In [106]:
+L = ['Normalized-losses','bore','stroke','horsepower','peak-rpm','price']
+
+for i in L:
+    x = np.mean(data[i])
+    data[i] = data[i].fillna(x)
+Comprobamos los missings values:
+
+In [107]:
+data.isnull().sum()
+Out[107]:
+Symboling            0
+Normalized-losses    0
+make                 0
+fuel-type            0
+aspiration           0
+num-of-doors         0
+body-style           0
+drive-wheels         0
+drive-wheels         0
+engine-location      0
+length               0
+width                0
+height               0
+curb-weigth          0
+engine-type          0
+num-of-cylinders     0
+engine-size          0
+fuel-system          0
+bore                 0
+stroke               0
+compression-ratio    0
+horsepower           0
+peak-rpm             0
+city-mpg             0
+highway-mpg          0
+price                0
+dtype: int64
+Obtén la longitud y anchuras medias por cada categoría (“body-style”)
+In [108]:
+# miramos qué categorías tiene 'body-style'
+data['body-style'].unique()
+Out[108]:
+array(['convertible', 'hatchback', 'sedan', 'wagon', 'hardtop'], dtype=object)
+In [109]:
+# indexamos las columnas que nos interesan
+data_aux = data.loc[:,['body-style','width','height']]
+In [110]:
+# agrupamos por categoría de body-style, agregando la media del resto de columnas
+
+bybody_style = data_aux.groupby('body-style')
+bybody_style.mean()
+Out[110]:
+width	height
+body-style		
+convertible	65.583333	51.433333
+hardtop	66.612500	52.850000
+hatchback	65.247143	52.108571
+sedan	66.260417	54.337500
+wagon	66.256000	56.728000
+Analiza el atributo peso (“curb-weight”) y dibuja su histograma para apreciar si sigue alguna distribución concreta
+In [111]:
+# para analizar una variable utilizamos la variable describe
+data['curb-weigth'].describe()
+Out[111]:
+count     205.000000
+mean     2555.565854
+std       520.680204
+min      1488.000000
+25%      2145.000000
+50%      2414.000000
+75%      2935.000000
+max      4066.000000
+Name: curb-weigth, dtype: float64
+In [112]:
+# dibujamos su histograma
+%matplotlib inline
+data['curb-weigth'].hist()
+Out[112]:
+<matplotlib.axes._subplots.AxesSubplot at 0xb88ad68>
+
+Analiza cuál es el número de cilindros que se da con más frecuencia en el dataset
+In [113]:
+# variable num-of-cylinders
+data['num-of-cylinders'].unique()
+Out[113]:
+array(['four', 'six', 'five', 'three', 'twelve', 'two', 'eight'], dtype=object)
+In [114]:
+# hacemos una tabla de frecuencias
+pd.value_counts(data['num-of-cylinders'])
+Out[114]:
+four      159
+six        24
+five       11
+eight       5
+two         4
+three       1
+twelve      1
+Name: num-of-cylinders, dtype: int64
+Obtén una lista ordenada de las diferentes marcas de coches.
+In [115]:
+# variable make
+x = data['make'].unique()
+x = list(x)
+x.sort()
+x
+Out[115]:
+['alfa-romero',
+ 'audi',
+ 'bmw',
+ 'chevrolet',
+ 'dodge',
+ 'honda',
+ 'isuzu',
+ 'jaguar',
+ 'mazda',
+ 'mercedes-benz',
+ 'mercury',
+ 'mitsubishi',
+ 'nissan',
+ 'peugot',
+ 'plymouth',
+ 'porsche',
+ 'renault',
+ 'saab',
+ 'subaru',
+ 'toyota',
+ 'volkswagen',
+ 'volvo']
+Crear un dataframe que solo contenga la marca toyota y cuyo precio sea mayor que la media de su precio.
+In [133]:
+x = data[data.make=='toyota']['price'].mean()
+print('El precio medio es:',x)
+data1 = data[(data.make=='toyota')&(data.price>x)]
+El precio medio es: 9885.8125
+In [132]:
+data1.head(5)
+Out[132]:
+Symboling	Normalized-losses	make	fuel-type	aspiration	num-of-doors	body-style	drive-wheels	drive-wheels	engine-location	...	engine-size	fuel-system	bore	stroke	compression-ratio	horsepower	peak-rpm	city-mpg	highway-mpg	price
+169	2	134.0	toyota	gas	std	2.0	hatchback	rwd	front	98.4	...	146	mpfi	3.62	3.50	9.3	116.0	4800.0	24	30	9989.0
+170	2	134.0	toyota	gas	std	2.0	hardtop	rwd	front	98.4	...	146	mpfi	3.62	3.50	9.3	116.0	4800.0	24	30	11199.0
+171	2	134.0	toyota	gas	std	2.0	hatchback	rwd	front	98.4	...	146	mpfi	3.62	3.50	9.3	116.0	4800.0	24	30	11549.0
+172	2	134.0	toyota	gas	std	2.0	convertible	rwd	front	98.4	...	146	mpfi	3.62	3.50	9.3	116.0	4800.0	24	30	17669.0
+174	-1	65.0	toyota	diesel	turbo	4.0	sedan	fwd	front	102.4	...	110	idi	3.27	3.35	22.5	73.0	4500.0	30	33	10698.0
+5 rows × 26 columns
+
+¿Qué son más caros los coches de gas o de diesel? Dibuja un boxplot
+In [162]:
+data_aux = data.loc[:,['fuel-type','price']]
+In [163]:
+data_aux.groupby('fuel-type').mean()
+Out[163]:
+price
+fuel-type	
+diesel	15838.150000
+gas	12922.694689
+In [164]:
+byfueltype = data.groupby("fuel-type")
+byfueltype.boxplot(column="price")
+Out[164]:
+diesel         AxesSubplot(0.1,0.15;0.363636x0.75)
+gas       AxesSubplot(0.536364,0.15;0.363636x0.75)
+dtype: object
+
+Elimina la columna symboling del dataframe
+In [137]:
+data = data.drop(labels = 'Symboling', axis = 1)
+Sacar la matriz de correlaciones
+In [140]:
+correlaciones = data.corr()
+correlaciones
+Out[140]:
+Normalized-losses	num-of-doors	engine-location	length	width	height	curb-weigth	engine-size	bore	stroke	compression-ratio	horsepower	peak-rpm	city-mpg	highway-mpg	price
+Normalized-losses	1.000000	-0.362587	-0.056518	0.019209	0.084195	-0.370706	0.097785	0.110997	-0.029266	0.054929	-0.114525	0.203434	0.237748	-0.218749	-0.178221	0.133999
+num-of-doors	-0.362587	1.000000	0.445395	0.392329	0.201970	0.545034	0.195968	0.017992	0.113292	-0.011167	0.159953	-0.123335	-0.240148	-0.021561	-0.045139	0.046545
+engine-location	-0.056518	0.445395	1.000000	0.874587	0.795144	0.589435	0.776386	0.569329	0.488760	0.160944	0.249786	0.351957	-0.360704	-0.470414	-0.544082	0.583168
+length	0.019209	0.392329	0.874587	1.000000	0.841118	0.491029	0.877728	0.683360	0.606462	0.129522	0.158414	0.554434	-0.287031	-0.670909	-0.704662	0.682986
+width	0.084195	0.201970	0.795144	0.841118	1.000000	0.279210	0.867032	0.735433	0.559152	0.182939	0.181129	0.642195	-0.219859	-0.642704	-0.677218	0.728699
+height	-0.370706	0.545034	0.589435	0.491029	0.279210	1.000000	0.295572	0.067149	0.171101	-0.055351	0.261214	-0.110137	-0.320602	-0.048640	-0.107358	0.134388
+curb-weigth	0.097785	0.195968	0.776386	0.877728	0.867032	0.295572	1.000000	0.850594	0.648485	0.168783	0.151362	0.750968	-0.266283	-0.757414	-0.797465	0.820825
+engine-size	0.110997	0.017992	0.569329	0.683360	0.735433	0.067149	0.850594	1.000000	0.583798	0.203094	0.028971	0.810713	-0.244599	-0.653658	-0.677470	0.861752
+bore	-0.029266	0.113292	0.488760	0.606462	0.559152	0.171101	0.648485	0.583798	1.000000	-0.055909	0.005201	0.575737	-0.254761	-0.584508	-0.586992	0.532300
+stroke	0.054929	-0.011167	0.160944	0.129522	0.182939	-0.055351	0.168783	0.203094	-0.055909	1.000000	0.186105	0.088264	-0.066844	-0.042179	-0.043961	0.082095
+compression-ratio	-0.114525	0.159953	0.249786	0.158414	0.181129	0.261214	0.151362	0.028971	0.005201	0.186105	1.000000	-0.205740	-0.435936	0.324701	0.265201	0.070990
+horsepower	0.203434	-0.123335	0.351957	0.554434	0.642195	-0.110137	0.750968	0.810713	0.575737	0.088264	-0.205740	1.000000	0.130971	-0.803162	-0.770903	0.757917
+peak-rpm	0.237748	-0.240148	-0.360704	-0.287031	-0.219859	-0.320602	-0.266283	-0.244599	-0.254761	-0.066844	-0.435936	0.130971	1.000000	-0.113723	-0.054257	-0.100854
+city-mpg	-0.218749	-0.021561	-0.470414	-0.670909	-0.642704	-0.048640	-0.757414	-0.653658	-0.584508	-0.042179	0.324701	-0.803162	-0.113723	1.000000	0.971337	-0.667449
+highway-mpg	-0.178221	-0.045139	-0.544082	-0.704662	-0.677218	-0.107358	-0.797465	-0.677470	-0.586992	-0.043961	0.265201	-0.770903	-0.054257	0.971337	1.000000	-0.690526
+price	0.133999	0.046545	0.583168	0.682986	0.728699	0.134388	0.820825	0.861752	0.532300	0.082095	0.070990	0.757917	-0.100854	-0.667449	-0.690526	1.000000
+¿Qué variables están más correladas (ordenadas de mayor a menor) con la variable precio?
+In [151]:
+correlaciones['price'].sort_values(ascending = False)
+Out[151]:
+price                1.000000
+engine-size          0.861752
+curb-weigth          0.820825
+horsepower           0.757917
+width                0.728699
+length               0.682986
+engine-location      0.583168
+bore                 0.532300
+height               0.134388
+Normalized-losses    0.133999
+stroke               0.082095
+compression-ratio    0.070990
+num-of-doors         0.046545
+peak-rpm            -0.100854
+city-mpg            -0.667449
+highway-mpg         -0.690526
+Name: price, dtype: float64
+Crear una tabla agrupados por marca y dentro de la misma agrupados por el numero de puertas cuyas columnas sean body-style y horsepower
+In [161]:
+data_aux = data.loc[:,['body-style','make','num-of-doors','horsepower']]
+bymake = data_aux.set_index(["make", "num-of-doors"])
+bymake
+Out[161]:
+body-style	horsepower
+make	num-of-doors		
+alfa-romero	2.0	convertible	111.0
+2.0	convertible	111.0
+2.0	hatchback	154.0
+audi	4.0	sedan	102.0
+4.0	sedan	115.0
+2.0	sedan	110.0
+4.0	sedan	110.0
+4.0	wagon	110.0
+4.0	sedan	140.0
+2.0	hatchback	160.0
+bmw	2.0	sedan	101.0
+4.0	sedan	101.0
+2.0	sedan	121.0
+4.0	sedan	121.0
+4.0	sedan	121.0
+4.0	sedan	182.0
+2.0	sedan	182.0
+4.0	sedan	182.0
+chevrolet	2.0	hatchback	48.0
+2.0	hatchback	70.0
+4.0	sedan	70.0
+dodge	2.0	hatchback	68.0
+2.0	hatchback	68.0
+2.0	hatchback	102.0
+4.0	hatchback	68.0
+4.0	sedan	68.0
+4.0	sedan	68.0
+3.0	sedan	102.0
+4.0	wagon	88.0
+2.0	hatchback	145.0
+...	...	...	...
+toyota	4.0	hatchback	92.0
+4.0	sedan	92.0
+4.0	hatchback	92.0
+2.0	hatchback	161.0
+2.0	hatchback	161.0
+4.0	sedan	156.0
+4.0	wagon	156.0
+volkswagen	2.0	sedan	52.0
+2.0	sedan	85.0
+4.0	sedan	52.0
+4.0	sedan	85.0
+4.0	sedan	85.0
+4.0	sedan	68.0
+4.0	sedan	100.0
+2.0	convertible	90.0
+2.0	hatchback	90.0
+4.0	sedan	110.0
+4.0	sedan	68.0
+4.0	wagon	88.0
+volvo	4.0	sedan	114.0
+4.0	wagon	114.0
+4.0	sedan	114.0
+4.0	wagon	114.0
+4.0	sedan	162.0
+4.0	wagon	162.0
+4.0	sedan	114.0
+4.0	sedan	160.0
+4.0	sedan	134.0
+4.0	sedan	106.0
+4.0	sedan	114.0
+205 rows × 2 columns
+
+Crear una nueva columna siendo la relación entre 'horsepower' y 'compression-ratio'
+In [156]:
+data['nueva variable'] = data['horsepower']/data['compression-ratio']
+In [158]:
+data['nueva variable'].head(5)
+Out[158]:
+0    12.333333
+1    12.333333
+2    17.111111
+3    10.200000
+4    14.375000
+Name: nueva variable, dtype: float64
