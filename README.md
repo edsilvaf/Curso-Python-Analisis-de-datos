@@ -5,6 +5,7 @@ El curso tendra un abordaje tanto conceptual como practico. Es recomendable habe
 
 Link: https://edsilvaf.github.io/Curso-Python-Analisis-de-datos/
 
+![](https://camo.githubusercontent.com/165f467f38ddc313731beae9e4d13608c1f991c9/68747470733a2f2f7777772e736f6c6f6c6561726e2e636f6d2f49636f6e732f436f75727365732f313037332e706e67)
 
 Objetivos:
 -	Estudiar modelos de aprendizaje estadístico.
